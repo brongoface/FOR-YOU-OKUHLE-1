@@ -111,19 +111,22 @@ button.no-btn:hover {
   pointer-events: none; /* prevents image from blocking button taps */
 }
 
-/* PAGE 4 – CREDITS */
+/* PAGE 4 – CREDITS MOBILE-FRIENDLY */
 .page4 {
   background: black;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 20px;
 }
 
 .credits {
-  position: absolute;
-  bottom: -100%;
-  width: 100%;
   color: #ffb6d9;
   font-size: 18px;
   line-height: 2.4;
+  text-align: center;
+  transform: translateY(100%); /* start offscreen */
   animation: credits 30s linear forwards;
 }
 
@@ -134,8 +137,8 @@ button.no-btn:hover {
 }
 
 @keyframes credits {
-  from { bottom: -100%; }
-  to { bottom: 120%; }
+  from { transform: translateY(100%); }
+  to { transform: translateY(-120%); }
 }
 
 /* MOBILE FIXES */
@@ -221,7 +224,7 @@ button.no-btn:hover {
 function go(n) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page' + n).classList.add('active');
-  document.getElementById('music').play().catch(() => {}); // prevent mobile errors
+  document.getElementById('music').play().catch(() => {}); // prevent mobile autoplay errors
 }
 
 // BUTTON EVENTS
@@ -233,4 +236,3 @@ document.getElementById('toPage4').addEventListener('touchstart', () => go(4));
 
 </body>
 </html>
-
