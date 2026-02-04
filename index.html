@@ -5,29 +5,34 @@
 <title>For You Okuhle</title>
 
 <style>
-body {
+/* GENERAL STYLES */
+html, body {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
   background: black;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-/* Pages */
+/* PAGES */
 .page {
   display: none;
-  position: absolute;
-  inset: 0;
+  position: relative;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  min-height: 100%;
+  padding: 20px;
 }
 
 .page.active {
   display: flex;
 }
 
-/* Shared */
+/* SHARED STYLES */
 h1 {
   color: #ff69b4;
   font-size: 48px;
@@ -43,7 +48,7 @@ h1 {
 }
 
 button {
-  padding: 14px 36px;
+  padding: 20px 40px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 30px;
@@ -55,10 +60,30 @@ button {
 
 button:hover { transform: scale(1.1); }
 
-/* Page 3 layout */
+/* NO BUTTON STYLE */
+button.no-btn {
+  margin-left: 15px;
+  background: none;
+  color: #ff69b4;
+  border: 2px solid #ff69b4;
+  border-radius: 30px;
+  padding: 14px 36px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.no-btn:hover {
+  transform: scale(1.1);
+  background: #ff69b4;
+  color: black;
+}
+
+/* PAGE 3 */
 .page3 {
   gap: 40px;
-  padding: 40px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
 }
 
 .text-box {
@@ -73,13 +98,20 @@ button:hover { transform: scale(1.1); }
   font-size: 32px;
 }
 
-.photo-box img {
-  max-width: 300px;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(255,105,180,.4);
+.photo-box {
+  max-width: 400px;
 }
 
-/* Page 4 – credits */
+.photo-box img {
+  width: 80vw;
+  max-width: 400px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(255,105,180,.4);
+  pointer-events: none; /* prevents image from blocking button taps */
+}
+
+/* PAGE 4 – CREDITS */
 .page4 {
   background: black;
   overflow: hidden;
@@ -105,6 +137,15 @@ button:hover { transform: scale(1.1); }
   from { bottom: -100%; }
   to { bottom: 120%; }
 }
+
+/* MOBILE FIXES */
+@media (max-width: 480px) {
+  #page2 div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
 </style>
 </head>
 
@@ -119,7 +160,7 @@ button:hover { transform: scale(1.1); }
   <div>
     <h1>FOR YOU<br>OKUHLE</h1>
     <p class="soft">Just something small… made with love 💗</p>
-    <button onclick="go(2)">Continue 💗</button>
+    <button id="toPage2">Continue 💗</button>
   </div>
 </div>
 
@@ -128,8 +169,8 @@ button:hover { transform: scale(1.1); }
   <div>
     <h1>WOULD YOU BE<br>MY VALENTINE? 💘</h1>
     <p class="soft">You make my world softer & brighter 💞</p>
-    <button onclick="go(3)">YES 💖</button>
-    <button onclick="alert('Nice try 😌')" style="margin-left:15px;background:none;color:#ff69b4;border:2px solid #ff69b4;">NO 🙈</button>
+    <button id="yesBtn">YES 💖</button>
+    <button class="no-btn" onclick="alert('Nice try 😌')">NO 🙈</button>
   </div>
 </div>
 
@@ -144,7 +185,7 @@ button:hover { transform: scale(1.1); }
     <p>
       I choose you — today, tomorrow, always.
     </p>
-    <button onclick="go(4)">One last thing… 🎬</button>
+    <button id="toPage4">One last thing… 🎬</button>
   </div>
 
   <div class="photo-box">
@@ -180,9 +221,16 @@ button:hover { transform: scale(1.1); }
 function go(n) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page' + n).classList.add('active');
-  document.getElementById('music').play();
+  document.getElementById('music').play().catch(() => {}); // prevent mobile errors
 }
+
+// BUTTON EVENTS
+document.getElementById('toPage2').addEventListener('click', () => go(2));
+document.getElementById('yesBtn').addEventListener('click', () => go(3));
+document.getElementById('toPage4').addEventListener('click', () => go(4));
+document.getElementById('toPage4').addEventListener('touchstart', () => go(4));
 </script>
 
 </body>
 </html>
+
