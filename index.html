@@ -111,13 +111,13 @@ button.no-btn:hover {
   pointer-events: none; /* prevents image from blocking button taps */
 }
 
-/* PAGE 4 – CREDITS MOBILE-FRIENDLY */
+/* PAGE 4 – CREDITS CENTERED MOBILE-FRIENDLY */
 .page4 {
   background: black;
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: center;  /* horizontal centering */
+  align-items: flex-end;    /* start from bottom */
   padding-bottom: 20px;
 }
 
@@ -125,9 +125,10 @@ button.no-btn:hover {
   color: #ffb6d9;
   font-size: 18px;
   line-height: 2.4;
-  text-align: center;
+  text-align: center;      /* center text inside the div */
   transform: translateY(100%); /* start offscreen */
   animation: credits 30s linear forwards;
+  max-width: 90%;          /* prevent stretching on small screens */
 }
 
 .credits h2 {
