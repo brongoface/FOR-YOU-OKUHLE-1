@@ -111,24 +111,30 @@ button.no-btn:hover {
   pointer-events: none; /* prevents image from blocking button taps */
 }
 
-/* PAGE 4 – CREDITS CENTERED MOBILE-FRIENDLY */
+/* PAGE 4 – CREDITS CENTERED AND MOBILE-FRIENDLY */
 .page4 {
   background: black;
   overflow: hidden;
   display: flex;
-  justify-content: center;  /* horizontal centering */
-  align-items: flex-end;    /* start from bottom */
+  justify-content: center; /* horizontal center */
+  align-items: flex-end;   /* vertical: start from bottom */
   padding-bottom: 20px;
 }
 
 .credits {
+  display: block;           /* ensures it centers */
+  text-align: center;       /* text inside centered */
   color: #ffb6d9;
   font-size: 18px;
   line-height: 2.4;
-  text-align: center;      /* center text inside the div */
   transform: translateY(100%); /* start offscreen */
+  max-width: 90%;
+  margin: 0 auto;           /* horizontal center */
+}
+
+/* trigger animation only when class is added */
+.animate-credits {
   animation: credits 30s linear forwards;
-  max-width: 90%;          /* prevent stretching on small screens */
 }
 
 .credits h2 {
@@ -222,17 +228,31 @@ button.no-btn:hover {
 </div>
 
 <script>
+let musicPlayed = false;
+
 function go(n) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page' + n).classList.add('active');
-  document.getElementById('music').play().catch(() => {}); // prevent mobile autoplay errors
+
+  if(!musicPlayed){
+    document.getElementById('music').play().catch(()=>{});
+    musicPlayed = true;
+  }
 }
 
 // BUTTON EVENTS
 document.getElementById('toPage2').addEventListener('click', () => go(2));
 document.getElementById('yesBtn').addEventListener('click', () => go(3));
-document.getElementById('toPage4').addEventListener('click', () => go(4));
-document.getElementById('toPage4').addEventListener('touchstart', () => go(4));
+
+// Page 3 → Page 4: trigger credits animation on click/touch
+document.getElementById('toPage4').addEventListener('click', () => {
+    go(4);
+    document.querySelector('.credits').classList.add('animate-credits');
+});
+document.getElementById('toPage4').addEventListener('touchstart', () => {
+    go(4);
+    document.querySelector('.credits').classList.add('animate-credits');
+});
 </script>
 
 </body>
