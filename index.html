@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You Okuhle</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+/* Pages */
+.page {
+  display: none;
+  position: absolute;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.page.active {
+  display: flex;
+}
+
+/* Shared */
+h1 {
+  color: #ff69b4;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.soft {
+  color: #ffb6d9;
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 25px 0;
+}
+
+button {
+  padding: 14px 36px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  background: #ff69b4;
+  color: black;
+  cursor: pointer;
+}
+
+button:hover { transform: scale(1.1); }
+
+/* Page 3 layout */
+.page3 {
+  gap: 40px;
+  padding: 40px;
+}
+
+.text-box {
+  max-width: 400px;
+  color: #ffb6d9;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.text-box h2 {
+  color: #ff69b4;
+  font-size: 32px;
+}
+
+.photo-box img {
+  max-width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(255,105,180,.4);
+}
+
+/* Page 4 – credits */
+.page4 {
+  background: black;
+  overflow: hidden;
+}
+
+.credits {
+  position: absolute;
+  bottom: -100%;
+  width: 100%;
+  color: #ffb6d9;
+  font-size: 18px;
+  line-height: 2.4;
+  animation: credits 30s linear forwards;
+}
+
+.credits h2 {
+  color: #ff69b4;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+@keyframes credits {
+  from { bottom: -100%; }
+  to { bottom: 120%; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div>
+    <h1>FOR YOU<br>OKUHLE</h1>
+    <p class="soft">Just something small… made with love 💗</p>
+    <button onclick="go(2)">Continue 💗</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div>
+    <h1>WOULD YOU BE<br>MY VALENTINE? 💘</h1>
+    <p class="soft">You make my world softer & brighter 💞</p>
+    <button onclick="go(3)">YES 💖</button>
+    <button onclick="alert('Nice try 😌')" style="margin-left:15px;background:none;color:#ff69b4;border:2px solid #ff69b4;">NO 🙈</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page page3" id="page3">
+  <div class="text-box">
+    <h2>My Love 💕</h2>
+    <p>
+      Loving you feels easy and real.  
+      You bring peace to my chaos and warmth to my days.
+    </p>
+    <p>
+      I choose you — today, tomorrow, always.
+    </p>
+    <button onclick="go(4)">One last thing… 🎬</button>
+  </div>
+
+  <div class="photo-box">
+    <img src="photo.jpg" alt="Us">
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page page4" id="page4">
+  <div class="credits">
+    <h2>❤️ THE STORY ❤️</h2>
+
+    <p><strong>Starring</strong><br>Okuhle ✨</p>
+    <p><strong>Written By</strong><br>Langton</p>
+    <p><strong>Directed By</strong><br>Love</p>
+    <p><strong>Produced By</strong><br>Late nights & memories</p>
+
+    <p><strong>Special Thanks</strong><br>
+      Your smile<br>
+      Your heart<br>
+      Every moment
+    </p>
+
+    <p><strong>Soundtrack</strong><br>Our song 🎶</p>
+
+    <p style="margin-top:40px;font-size:22px;color:#ff69b4;">
+      Always you. 💗
+    </p>
+  </div>
+</div>
+
+<script>
+function go(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  document.getElementById('music').play();
+}
+</script>
+
+</body>
+</html>
