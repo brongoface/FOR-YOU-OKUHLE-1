@@ -108,7 +108,7 @@ button.no-btn:hover {
   height: auto;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(255,105,180,.4);
-  pointer-events: none; /* prevents image from blocking button taps */
+  pointer-events: none;
 }
 
 /* PAGE 4 – CREDITS CENTERED AND MOBILE-FRIENDLY */
@@ -116,20 +116,22 @@ button.no-btn:hover {
   background: black;
   overflow: hidden;
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: flex-end;   /* vertical: start from bottom */
+  flex-direction: column;  /* stack vertically */
+  justify-content: flex-end; /* start from bottom */
+  align-items: center;     /* horizontal centering */
   padding-bottom: 20px;
 }
 
 .credits {
-  display: block;           /* ensures it centers */
-  text-align: center;       /* text inside centered */
+  display: block;
+  text-align: center;       /* center text inside */
+  width: 100%;              /* full width so text-align works */
+  max-width: 90%;           /* prevent stretching on small screens */
   color: #ffb6d9;
   font-size: 18px;
   line-height: 2.4;
   transform: translateY(100%); /* start offscreen */
-  max-width: 90%;
-  margin: 0 auto;           /* horizontal center */
+  margin: 0 auto;           /* horizontally center the div */
 }
 
 /* trigger animation only when class is added */
